@@ -11,8 +11,30 @@ const products = [
   "azul-XG", 
   "azul-XG", 
   "azul-P"
-]
+];
+
+const parseProducts = (produtos) => {
+  
+  return produtos.reduce((acc, curVal) => {
+    
+    const [key, value] = curVal.split('-');
+
+    const hasKey = Object.keys(acc).includes(key);
+
+    if (!hasKey) {
+      acc[key] = {};
+    }
+
+    const hasValue = Object.keys(acc[key]).includes(value);
+
+    acc[key][value] = !hasValue ? 1 : ++acc[key][value];
+
+    return acc;
+
+  }, {})
+
+};
 
 module.exports = () => {
-  // Código aqui
-}
+  return parseProducts(products);
+};
